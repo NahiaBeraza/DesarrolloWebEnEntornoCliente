@@ -11,49 +11,45 @@
 <body>
 
     <h4>*Datos de carácter obligatorio</h4>
-
+    
     <h2>DATOS DEL USUARIO</h2>
 
     <form onsubmit="return validarFormulario()">
 
-        <!-- pattern: obliga a que el contenido del campo cumpla la expresión regular indicada. 
-        Por ejemplo para un código postal sería pattern="^[0-9]{5}$". --> 
-        <!--PUEDO UTILIZAR ESTO?-->
-
         <label>Nombre*: </label> <!-- CAMBIAR LO DE LA ETIQUETA LABEL -->
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre" required><br><br>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" ><br><br>
 
         <label>Primer apellido*: </label>
-        <input type="text" id="primer_apellido" name="primer_apellido" placeholder="Primer apellido" required><br><br>
+        <input type="text" id="primer_apellido" name="primer_apellido" placeholder="Primer apellido" ><br><br>
 
         <label>Segundo apellido: </label>
-        <input type="text" id="segundo_apellido" name="segundo_apellido" placeholder="Seguundo apellido" required><br><br>
+        <input type="text" id="segundo_apellido" name="segundo_apellido" placeholder="Seguundo apellido" ><br><br>
 
         <label>Fecha nacimiento*: </label>
-        <input type="text" id="fecha" name="fecha" placeholder="dd-mm-aaaa" required><br><br>
+        <input type="text" id="fecha" name="fecha" placeholder="dd/mm/aaaa" ><br><br>
 
         <label>Tipo documento*: </label>
-        <select id="tipo_documento" name="tipo_documento" required>
+        <select id="tipo_documento" name="tipo_documento" >
             <option>DNI</option>
             <option>NIE</option>
             <option>Pasaporte</option>
         </select><br><br>
 
         <label>Nº documento*: </label>
-        <input type="text" id="numero_documento" name="numero_documento" placeholder="Nº documento" required><br><br>
+        <input type="text" id="numero_documento" name="numero_documento" placeholder="Nº documento" ><br><br>
 
         <div>
             <p>Este identificador se utilizará como usuario de acceso a la Sede electrónica.</p>
         </div>
 
         <label>Contraseña*: </label>
-        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required><br><br>
+        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" ><br><br>
 
         <label>Repita contraseña*: </label>
-        <input type="password" id="contrasena2" name="contrasena2" placeholder="Repita contraseña" required><br><br>
+        <input type="password" id="contrasena2" name="contrasena2" placeholder="Repita contraseña" ><br><br>
 
         <label>Número de soporte/IDES/P/IXESP: *</label>
-        <input type="text" id="soporte" name="soporte" placeholder="Número de soporte" required><br><br>
+        <input type="text" id="soporte" name="soporte" placeholder="Número de soporte" ><br><br>
 
         <div>
             <p>
@@ -63,13 +59,13 @@
         </div>
 
         <label>Correo electrónico*: </label>
-        <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required><br><br>
+        <input type="email" id="correo" name="correo" placeholder="Correo electrónico" ><br><br>
 
         <label>Repita correo electrónico*: </label>
-        <input type="email" id="email2" name="email2" placeholder="Repira correo" required><br><br>
+        <input type="email" id="email2" name="email2" placeholder="Repira correo" ><br><br>
 
         <label>Teléfono móvil*: </label>
-        <input type="text" id="telefono" name="telefono" placeholder="Teléfono móvil" required><br><br>
+        <input type="text" id="telefono" name="telefono" placeholder="Teléfono móvil" ><br><br>
 
         <div>
             <p>El correo electrónico y teléfono móvil indicados se utilizarán para recibir notificaciones sobre trámites.</p>
@@ -78,7 +74,7 @@
         <br>
         
 
-        <input type="checkbox" id="check" name="check">
+        <input type="checkbox" id="condiciones">
         *Declaro que los datos que figuran en la solicitud de registro son
         ciertos, asumiendo en caso contrario, las responsabilidades que
         pudieran derivarse de su inexactitud y autorizando al Ministerio de
@@ -86,7 +82,7 @@
         Sistema de Verificación de Datos de Identidad de la Dirección
         General de la Policía.
         <br>
-        <input type="checkbox" id="check" name="check">
+        <input type="checkbox" id="privacidad">
         *Doy mi consentimiento
         <br>
         Información importante
@@ -124,8 +120,26 @@
         <button type="reset">Cancelar</button>
 
     </form>
-    <!--AÑADO AQUI EL OTRO FORMULARIO PARA DAR CONSENTIMIENTO?-->
-    <script src="validaciones.js"></script>
+    <div id="errores" class="errores">
+        El campo "Número de soporte/IDESP/IXESP" es obligatorio.<br>
+        El Tipo de documento seleccionado en el registro es DNI.<br>
+        Revise los campos TIPO de documento y Documento.<br>
+        Si es un DNI, consta de 9 caracteres, 8 numéricos y una letra al
+        final. <br>
+        Si su DNI tiene menos de 9 caracteres, complete con 0 a la
+        izquierda hasta completar el número de caracteres necesarios.
+        Debe rellenar el campo "primer apellido".<br>
+        El formato del campo "fecha de nacimiento" no es correcto, el
+        formato es dd/mm/aaaa.<br>
+        Debe rellenar el campo "contraseña".<br>
+        Debe rellenar el campo "repetir contraseña".<br>
+        Debe rellenar el campo "Teléfono móvil".<br>
+        Debe rellenar el campo "Correo electrónico".<br>
+        La dirección de correo electrónico no tiene un formato correcto.<br>
+        Debe dar su consentimiento, en el apartado "DECLARACIONES", al
+        tratamiento de sus datos de carácter personal
+    </div>
+    <script src="js/validaciones.js"></script>
 
 </body>
 </html>

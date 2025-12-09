@@ -4,7 +4,7 @@ function validarFormulario(){
     let errores=[];
 
     //Validar nombre
-    const nombre= document.getElementeById("nombre").value; //recoge el valor de nombre (el input)
+    const nombre= document.getElementById("nombre").value; //recoge el valor de nombre (el input)
     const errorNombre = validarNombre(nombre); //lo envia a la funcion de validar nombre para comprobar si está bien
 
     if(errorNombre !== ""){ //si devuelve la cadena vacia es que esta bien, si devuelve el error lo introduce en el array
@@ -13,7 +13,7 @@ function validarFormulario(){
 
     //Validar apellido
 
-    const apellido= document.getElementeById("primer_apellido").value; //recoge el valor de apellido (el input)
+    const apellido= document.getElementById("primer_apellido").value; //recoge el valor de apellido (el input)
     const errorApellido = validarPrimerApellido(apellido); //lo envia a la funcion de validar apellido para comprobar si está bien
 
     if(errorApellido !== ""){ 
@@ -22,7 +22,7 @@ function validarFormulario(){
 
     //Validar apellido 2
 
-    const apellido2= document.getElementeById("segundo_apellido").value; //recoge el valor del apellido2 (el input)
+    const apellido2= document.getElementById("segundo_apellido").value; //recoge el valor del apellido2 (el input)
     const errorApellido2 = validarSegundoApellido(apellido2); //lo envia a la funcion de validar apellido2 para comprobar si está bien
 
     if(errorApellido2 !== ""){ 
@@ -30,7 +30,7 @@ function validarFormulario(){
     }
 
     //Validar fecha nacimiento
-    const fecha= document.getElementeById("fecha").value; 
+    const fecha= document.getElementById("fecha").value; 
     const errorFecha = validarFechaNacimiento(fecha);
 
     if(errorFecha !== ""){ 
@@ -38,7 +38,7 @@ function validarFormulario(){
     }
 
     //Validar Tipo de documento
-    const documento= document.getElementeById("tipo_documento").value; 
+    const documento= document.getElementById("tipo_documento").value; 
     const errorDocumento = validarTipoDocumento(documento);
 
     if(errorDocumento !== ""){ 
@@ -46,7 +46,7 @@ function validarFormulario(){
     }
 
     //validar validar número de documento
-    const nDocumento= document.getElementeById("numero_documento").value; 
+    const nDocumento= document.getElementById("numero_documento").value; 
     const errorNumDocumento = validarNDocumento(nDocumento);
 
     if(errorNumDocumento !== ""){ 
@@ -55,7 +55,7 @@ function validarFormulario(){
 
     //validar contraseña
 
-    const contrasena= document.getElementeById("contrasena").value; 
+    const contrasena= document.getElementById("contrasena").value; 
     const errorContrasena = validarContraseña(contrasena);
 
     if(errorContrasena !== ""){ 
@@ -63,8 +63,8 @@ function validarFormulario(){
     }
 
     //validar contraseña repetida
-    const contrasenaRepe= document.getElementeById("contrasena2").value; 
-    const errorContrasenaRepe = validarContraseñaRepetida(contrasenaRepe);
+    const contrasenaRepe= document.getElementById("contrasena2").value; 
+    const errorContrasenaRepe = validarContraseñaRepetida(contrasenaRepe, contrasena);
 
     if(errorContrasenaRepe !== ""){ 
         errores.push(errorContrasenaRepe);  
@@ -72,7 +72,7 @@ function validarFormulario(){
 
     //validar correo
 
-    const correo= document.getElementeById("correo").value; 
+    const correo= document.getElementById("correo").value; 
     const errorCorreo = validarCorreo(correo);
 
     if(errorCorreo !== ""){ 
@@ -80,7 +80,7 @@ function validarFormulario(){
     }
 
     //validar movil
-    const telefono= document.getElementeById("telefono").value; 
+    const telefono= document.getElementById("telefono").value; 
     const errorTelefono = validarMovil(telefono);
 
     if(errorTelefono !== ""){ 
@@ -89,23 +89,38 @@ function validarFormulario(){
 
     //validar número de soporte
 
-    const soporte= document.getElementeById("soporte").value; 
+    const soporte= document.getElementById("soporte").value; 
     const errorsoporte = validarNumeroDeSoporte(soporte);
 
-    if(errorNumDocumento !== ""){ 
-        errores.push(errorNumDocumento);  
+    
+    if(errorsoporte !== ""){ 
+        errores.push(errorsoporte);  
     }
 
-    if (errores.length > 0)
-        return false; 
-    else{
-        return true;
+    //Validar checkbox
+
+    const condiciones = document.getElementById("condiciones").checked;
+    const privacidad = document.getElementById("privacidad").checked;
+    const errorCheck = validarCheckBox(condiciones, privacidad);
+
+    if(errorCheck!==""){
+        errores.push(errorCheck);
     }
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    if (errores.length > 0)
-        return false; 
-    else{
-        return true;
+
+    //////ERRORESSSS
+
+    let cajaErrores = document.getElementById("errores");
+
+    console.log(errores);
+    console.log("Errores:", errores);
+
+
+    if (errores.length > 0) {
+        cajaErrores.style.display = "block";  // SOLO mostrar la caja
+        return false; // NO enviar formulario
+    } else {
+        cajaErrores.style.display = "none";   // Ocultar si todo está bien
+        return true; // enviar formulario
     }
 
 }
@@ -116,7 +131,7 @@ function validarNombre(nombre){ //TAMBIEN PODRIA HACERLO CON TRUE Y FALSE, PERO 
     let nombreLimpio= nombre.trim(); //quita los espacios tanto por detras como por delante
                                     // " Hola " -> "Hola" // "     " -> ""
 
-    if(nomnbreLimpio === ""){ //Si el nombreLimpio esta vacio significa que el usuario ha introducido mal el nombre
+    if(nombreLimpio === ""){ //Si el nombreLimpio esta vacio significa que el usuario ha introducido mal el nombre
         return "El nombre no es correcto"; //devuelve el error, que se comprobara en validarFormulario y se introducira en el array
 
     }else{
@@ -151,52 +166,56 @@ function validarSegundoApellido(apellido){ //es igual que la funcion validarNomb
 
 //validarFechaNacimiento()
 
-function validarFechaNacimiento(fecha) { //LO HE BUSCADO
+///LO HE BUSCADOOOO
+function validarFechaNacimiento(fecha) {
 
-    // La fecha debe tener el formato dd/mm/aaaa (10 caracteres)
+    // 1) Comprobar longitud exacta dd/mm/aaaa → 10 caracteres
     if (fecha.length !== 10 || fecha.charAt(2) !== "/" || fecha.charAt(5) !== "/") {
-        return "La fecha no tiene el formato válido (dd/mm/aaaa).";
+        return "La fecha debe tener el formato dd/mm/aaaa.";
     }
 
-    // Separar día, mes y año
+    // 2) Separar partes
     let partes = fecha.split("/");
     let dia = parseInt(partes[0]);
     let mes = parseInt(partes[1]);
     let anio = parseInt(partes[2]);
 
-    // Comprobación de día y mes
+    // 3) Validar numéricos
     if (isNaN(dia) || isNaN(mes) || isNaN(anio)) {
         return "La fecha contiene valores no numéricos.";
     }
 
-    if (dia < 1 || dia > 31) {
-        return "El día no es válido.";
+    // 4) Validar rangos
+    if (dia < 1 || dia > 31) return "El día no es válido.";
+    if (mes < 1 || mes > 12) return "El mes no es válido.";
+    if (anio < 1900 || anio > 2025) return "El año no es válido.";
+
+    // 5) Fecha actual del ejercicio
+    let diaActual = 28;
+    let mesActual = 1;
+    let anioActual = 2025;
+
+    // 6) Comprobar que no sea futura
+    if (
+        anio > anioActual ||
+        (anio === anioActual && mes > mesActual) ||
+        (anio === anioActual && mes === mesActual && dia > diaActual)
+    ) {
+        return "La fecha de nacimiento no puede ser futura.";
     }
 
-    if (mes < 1 || mes > 12) {
-        return "El mes no es válido.";
-    }
+    // 7) Calcular edad
+    let edad = anioActual - anio;
 
-    // 4. Obtener la fecha actual
-    let hoy = new Date();
-    let añoActual = hoy.getFullYear();
-    let mesActual = hoy.getMonth() + 1; // meses empiezan en 0
-    let diaActual = hoy.getDate();
-
-    // 5. Calcular edad 
-    let edad = añoActual - anio;
-
-    // 6. Ajustar por si aún no ha cumplido años este año
+    // Ajustar si aún no ha cumplido este año
     if (mesActual < mes || (mesActual === mes && diaActual < dia)) {
         edad--;
     }
 
-    // 7. Comprobar si es mayor de edad
     if (edad < 18) {
         return "Debe ser mayor de edad.";
     }
 
-    // Si todo está bien
     return "";
 }
 
@@ -206,7 +225,7 @@ function validarFechaNacimiento(fecha) { //LO HE BUSCADO
 function validarTipoDocumento(tipo){
 
     // Si el tipo NO es ninguno de los tres está mal
-    if (tipo === "DNI" || tipo === "NIE" || tipo === "PASAPORTE") {
+    if (tipo === "DNI" || tipo === "NIE" || tipo === "Pasaporte") {
         return ""; // válido
     }
 
@@ -250,7 +269,7 @@ function validarNDocumento(dni){ //validar DNI
     //así devuelve una sola letra
 
     //comparo la letra correcta con la del usuario
-    if (letraUsuario !== letraCorrecta) {
+    if (letra !== letraCorrecta) {  
         return "La letra no es correcta";
     }
 
@@ -258,6 +277,7 @@ function validarNDocumento(dni){ //validar DNI
     return "";
 
 }
+
 
 //validarContraseña()
 
@@ -312,6 +332,8 @@ function validarContraseña(contraseña){
         return "La contraseña debe de tener un al menos un simbolo.";
     }
 
+    return "";
+
 }
 
 //validarContraseñaRepetida()
@@ -322,9 +344,8 @@ function validarContraseñaRepetida(contraseñaRepetida, contraseña){
     let contraseñaCorrecta= validarContraseña(contraseña);
 
     //si esta vacia devuelvo error
-    if(contraseñaCorrecta===""){
+    if (contraseñaCorrecta !== "") {
         return "La contraseña principal no es correcta.";
-
     }
 
     //la contraseñaRepeptida tengo que mirar si esta vacia por eso le elimino los espacios y compruebo
@@ -335,7 +356,7 @@ function validarContraseñaRepetida(contraseñaRepetida, contraseña){
     }
 
     //si son diferentes da error
-    if(contraseñaRepeLimpia!==contraseñaCorrecta){
+    if(contraseñaRepeLimpia!== contraseña){
         return "Las contraseñas no son iguales";
 
     }
@@ -360,56 +381,70 @@ function validarCorreo(correo){
         return "El correo no es correcto";
     }
 
+    return "";
 }
 
 //validarMovil()
 
 function validarMovil(telefono){
-    let teleLimpio= telefono.trim();
-    if(teleLimpio===""){
-        return "Telefono no es correcto."
+
+    //quito los espacios por delante y por detras
+    let teleLimpio = telefono.trim();
+
+    //comprobar si está vacio
+    if (teleLimpio === "") {
+        return "Telefono no es correcto.";
     }
 
-    if(teleLimpio.length<9){
-        return "La longitud del telefono no es correcta."
+    //comprobar si su longitud es menor de 9
+    if (teleLimpio.length < 9) {
+        return "La longitud del telefono no es correcta.";
     }
 
-    //comprobar si son todo números
-    let tieneNumero=false;
-
-    for(let i=0; i<teleLimpio.length; i++){
-
-        let numero= teleLimpio[i];
-
-        if("1234567890".includes(numero)){
-            tieneNumero=true;
-            break;
-        }
-    }
-
-    if(!tieneNumero){
-        return "El telefono debe de tener al menos un número";
-    }
-
-    //comprobar el primer número    //lo he buscado
-    let primero = tel.charAt(0);
+    //comprobar primer caracter
+    let primero = teleLimpio.charAt(0);
 
     if (!"6789+".includes(primero)) {
         return "El teléfono debe comenzar por 6, 7, 8, 9 o +.";
     }
 
+    //si empieza por +, lo quito para comprobar los demas
+    if (primero === "+") {
+        teleLimpio = teleLimpio.slice(1); //quito solo el primer caracter
+    }
+
+    //comprobar que TODOS los caracteres restantes sean números
+    for (let i = 0; i < teleLimpio.length; i++) {
+        let caracter = teleLimpio[i];
+
+        if (!"0123456789".includes(caracter)) {
+            return "El teléfono solo puede contener números.";
+        }
+    }
+
+    //si todo está bien devuelve vacio
+    return "";
 }
 
-//validarNumeroDeSoporte()
+//Validar número soporte
+function validarNumeroDeSoporte(numero){ 
+    let numeroLimpio = numero.trim();
 
-function validarNumeroDeSoporte(soporte){
-    let soporteLimpio=soporte.trim();
+    if(numeroLimpio===""){
+        return "El número de soporte no es correcto."
 
-    if(soporteLimpio===""){
-        return "El número de soporte no es correcto";
+    }else{
+        return"";
+    }
+}
+
+//Validar checkbox
+function validarCheckBox(condiciones, privacidad){
+
+    if (!condiciones || !privacidad){  
+        return "Se deben de aceptar ambas declaraciones.";
     }
 
     return "";
 }
-
-//TAMBIEN MIRAR SI ES MAYOR DE 18 AÑOS
+    
