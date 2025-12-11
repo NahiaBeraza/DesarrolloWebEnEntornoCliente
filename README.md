@@ -3,7 +3,7 @@ En este trabajo crearemos una "replica" del **Wordle** para aprender a validar d
 
 ## ***Nahia Beraza***
 
-##Caracteristicas principales del **Wordle**
+## Caracteristicas principales del **Wordle**
 + Limite de intentos.
 + Pistas de colores
     1. *Verde:* La letra está en la palabra y en la posición correcta.
