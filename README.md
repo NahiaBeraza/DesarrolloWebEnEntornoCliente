@@ -1,7 +1,7 @@
-#Wordle
+# Wordle
 En este trabajo crearemos una "replica" del **Wordle** para aprender a validar diferentes elementos de *Java Script*.
 
-## ***Nahia Beraza***
+### ***Nahia Beraza***
 
 ## Caracteristicas principales del **Wordle**
 + Limite de intentos.
