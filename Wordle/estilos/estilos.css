@@ -1,0 +1,83 @@
+body {
+    background-color: rgb(18, 18, 19);
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    margin-bottom: 0.5rem;
+}
+
+hr {
+    width: 50%;
+    border: 3px solid #474b4e;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+/* ===== TABLERO ===== */
+
+#contenedor_general {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.fila-inputs {
+    display: flex;
+    gap: 0.5rem;
+}
+
+input[type="text"] {
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: rgb(18, 18, 19);
+    border: 3px solid #474b4e;
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: bold;
+    color: #818384;
+    text-transform: uppercase;
+}
+
+/* ===== TECLADO ===== */
+
+#teclado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fila-teclado {
+    display: flex;
+    justify-content: center;
+}
+
+/* BOTONES */
+button {
+    width: 4rem;
+    height: 6rem;
+    margin: 4px;
+    background: #818384;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* ENTER y BORRAR */
+#enter {
+    width: 7rem;
+    font-size: 1rem;
+}
+
+#borrar {
+    width: 7rem;
+    font-size: 2rem;
+}
