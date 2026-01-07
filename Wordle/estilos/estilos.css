@@ -81,3 +81,21 @@ button {
     width: 7rem;
     font-size: 2rem;
 }
+
+.correcta{ 
+    background:#538d4e !important; 
+    border-color:#538d4e !important;
+    color:white !important; 
+}
+
+.esta{ 
+    background:#b59f3b !important; 
+    border-color:#b59f3b !important; 
+    color:white !important; 
+}
+
+.ausente{ 
+    background:#3a3a3c !important; 
+    border-color:#3a3a3c !important; 
+    color:white !important; 
+}
